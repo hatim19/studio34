@@ -1,0 +1,103 @@
+<html>
+
+<head>
+
+
+<script src="/resources/j.js">
+</script>
+
+<script>
+
+$( document ).ready(function() {
+  	//alert("gffg");
+	//var vid = document.getElementById("myaudio");
+	//vid.play();
+	/*function playVid() {
+	    vid.play();
+	}
+
+	function pauseVid() {
+	    vid.pause();
+	}*/
+	
+});
+
+function playVid() {
+
+	var vid = document.getElementById("myaudio");
+    vid.play();
+}
+
+function hit_server( ) {
+        //alert("gfdg");
+        //document.getElementById("div1").innerHTML = "fgG";
+        
+        /*$.getJSON("http://localhost:8080/hello-world?name=hatim", function (data) {
+                     console.log(data);
+        }); */
+
+        $.ajax({
+                type: "GET",
+                url: "http://172.17.92.93:8080/SpringJsonOutput/rest/student",
+                dataType: 'json',
+                async: false,
+                contentType: 'application/json',
+                success: function(data){
+                        alert("sucess "+data.id+" "+data.name);
+                        document.getElementById("div1").innerHTML = data.id ;
+                },
+                error: function(xhr){
+                		//alert("dfgsd");
+                        document.getElementById("div1").innerHTML = xhr.statusText ;
+                }
+        });
+        
+        //alert("gd") ;
+
+}
+
+function playaudio( i ){
+	
+	if ( i == "32" ){
+		
+		doucument.getElementById('myaudio').innerHTML('');
+	}
+	else if ( i == "64" ){
+		
+		doucument.getElementById('myaudio').innerHTML('<source src="nursery64.mp3" type="audio/mpeg">');
+	}
+	else{
+		
+		doucument.getElementById('myaudio').innerHTML('<source src="nursery128.mp3" type="audio/mpeg">');
+	}
+	
+	
+}
+
+</script>
+
+</head>
+
+<body>
+
+<p id="div1"></p>
+
+<audio id="myaudio" controls autoplay>
+  
+  <source src="nursery64.mp3" type="audio/mpeg">
+  
+</audio>
+<br />
+
+<button onclick="playVid()">play audio!!</button>
+
+
+
+
+
+
+</body>
+
+</html>
+
+	
