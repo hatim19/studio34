@@ -17,7 +17,7 @@ public class MediaServiceImpl implements MediaService {
 	
 	@Transactional
 	public List<Object[]> getList() {
-		  //return dataDao.getList();
+		  //return dataDao.getHomeMediaList();
 		Session session = sessionFactory.openSession();
 		  @SuppressWarnings("unchecked")
 		  List<Object[]> mediaList = session.createQuery("SELECT imageName,id FROM Media ORDER BY createdAt ASC")
@@ -29,7 +29,7 @@ public class MediaServiceImpl implements MediaService {
 	}
 	
 	public List<Object[]> getListOffset(Integer Episode) {
-		  //return dataDao.getList();
+		  //return dataDao.getHomeMediaList();
 		Session session = sessionFactory.openSession();
 		  @SuppressWarnings("unchecked")
 		  List<Object[]> mediaList = session.createQuery("SELECT imageName,id FROM Media ORDER BY createdAt ASC")
