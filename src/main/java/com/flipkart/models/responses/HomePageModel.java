@@ -1,8 +1,8 @@
-package com.beingjavaguys.models.responses;
+package com.flipkart.models.responses;
 
 import java.io.Serializable;
 
-public class homePageModel implements Serializable{
+public class HomePageModel implements Serializable{
 	
 	
 	private String imageName;

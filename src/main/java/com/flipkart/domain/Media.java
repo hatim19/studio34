@@ -1,4 +1,4 @@
-package com.beingjavaguys.domain;
+package com.flipkart.domain;
 
 import java.io.Serializable;
 

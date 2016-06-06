@@ -1,4 +1,4 @@
-package com.beingjavaguys.services;
+package com.flipkart.services;
 
 import java.util.List;
 
@@ -7,8 +7,7 @@ import javax.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.beingjavaguys.domain.Media;
-import com.beingjavaguys.models.responses.homePageModel;
+import com.flipkart.domain.Media;
 
 public class MediaServiceImpl implements MediaService {
 	

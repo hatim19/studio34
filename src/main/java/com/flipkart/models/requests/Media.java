@@ -1,4 +1,4 @@
-package com.beingjavaguys.models.requests;
+package com.flipkart.models.requests;
 
 import java.io.Serializable;
 

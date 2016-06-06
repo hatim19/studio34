@@ -1,8 +1,8 @@
-package com.beingjavaguys.services;
+package com.flipkart.services;
 
 import java.util.List;
 
-import com.beingjavaguys.domain.Media;
+import com.flipkart.domain.Media;
 
 public interface MediaService {
 
