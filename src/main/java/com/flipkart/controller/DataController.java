@@ -32,7 +32,7 @@ public class DataController {
 	 
 	 @Transactional
 	 @RequestMapping("/home")
-	 public ModelAndView getList() {
+	 public ModelAndView getHomePageList() {
 		 Session session = sessionFactory.openSession();
 		 List<HomePageModel> mediaList = mediaService.getList(session);
 		 ModelAndView mv = new ModelAndView("home", "mediaList", mediaList);
