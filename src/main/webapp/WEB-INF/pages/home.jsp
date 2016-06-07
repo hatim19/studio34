@@ -143,19 +143,19 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-      <a href="http://www.youtube.com/watch?v=mgzpUy2zRss&feature=youtu.be&t=1053">
-        <img style="width:100%" src="${mediaList[0][0]}" class="img-responsive" alt="Image" ></a>
+      <a href="sections/${mediaList[0].id}">
+        <img style="width:100%" src="${mediaList[0].imageName}" class="img-responsive" alt="Image" ></a>
         <div class="carousel-caption">
-          <h3 style="font-family: Times, sans-serif;font-style: bold; font-size: 30px ;"> Episode 34</h3>
+          <h3 style="font-family: Times, sans-serif;font-style: bold; font-size: 30px ;"> Episode ${mediaList[0].id}</h3>
           <p style="font-family: Times, sans-serif;font-style: bold; font-size: 17px ;">Current Episode</p>
         </div>      
       </div>
 
       <div class="item">
-        <a href="http://www.youtube.com"> 
-        <img src="${mediaList[1][0]}" class="img-responsive" style="width:100%" alt="Image" ></a>
+        <a href="sections/${mediaList[1].id}"> 
+        <img src="${mediaList[1].imageName}" class="img-responsive" style="width:100%" alt="Image" ></a>
         <div class="carousel-caption">
-          <h3 style="font-family: Times, sans-serif;font-style: bold; font-size: 30px ;">Episode 33</h3>
+          <h3 style="font-family: Times, sans-serif;font-style: bold; font-size: 30px ;">Episode ${mediaList[1].id}</h3>
           <p style="font-family: Times, sans-serif;font-style: bold; font-size: 17px ;">Previous Episode</p>
         </div>      
       </div>
@@ -178,8 +178,8 @@
     <div class="row">
     <c:forEach items="${mediaList}" var="user">
     	<div class="col-sm-4">
-    	<a href="#" class='thumbnail'>
-      	<img src="${user[0]}" class="img-responsive" style="width:95%" alt="Image" /></a>
+    	<a href="sections/${user.id}" class='thumbnail'>
+      	<img src="${user.imageName}" class="img-responsive" style="width:95%" alt="Image" /></a>
     	</div>
     </c:forEach> 
     </div>   

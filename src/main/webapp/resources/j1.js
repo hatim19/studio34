@@ -6,7 +6,7 @@ $( document ).ready(function() {
 
 function showMore( ) {	
 	var episode = document.getElementById("episode") ;
-	alert("showMore/"+episode.innerHTML);
+	//alert("showMore/"+episode.innerHTML);
 	$.ajax({
         type: "GET",
         url: "showMore/"+episode.innerHTML,
@@ -35,14 +35,14 @@ function showMore( ) {
         			
         			//alert(j);
 		    		episodeView += "<div class='col-sm-4'>" ;
-		        	episodeView += "<a href='#' class='thumbnail'>";
-		        	episodeView += "<img src='" + result[j+i][0]+ "' class='img-responsive' style='width:95%' alt='Image' /></a>";
+		        	episodeView += "<a href='sections/" + result[j+i]['id']+ "' class='thumbnail'>";
+		        	episodeView += "<img src='" + result[j+i]['imageName']+ "' class='img-responsive' style='width:95%' alt='Image' /></a>";
 		        	episodeView += "</div>" ;
 		        	
 		    	}
         		
         		episodeView += "</div>" ;
-        		alert(episodeView) ;
+        		//alert(episodeView) ;
         		$('.episode-container').append(episodeView);
         		
         		if ( j != 3 ){
