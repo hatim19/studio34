@@ -1,10 +1,8 @@
 package com.flipkart.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 
 @Entity
@@ -15,7 +13,7 @@ public class Section {
 	
 	@Id
 	@GeneratedValue
-	private Integer id ;
+	private int id ;
 	
 	@Column(name = "isHighlight")
 	private boolean isHighlight;
@@ -31,8 +29,13 @@ public class Section {
 	
 	@Column(name = "updatedAt")
 	private String updatedAt;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "mediaId", nullable = false)
+	@JsonBackReference
+	private Media media;
 	
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
 
@@ -80,16 +83,12 @@ public class Section {
 		this.updatedAt = updatedAt;
 	}
 
-	public Integer getMediaId() {
-		return mediaId;
+	public Media getMedia() {
+		return media;
 	}
 
-	public void setMediaId(Integer mediaId) {
-		this.mediaId = mediaId;
+	public void setMedia(Media media) {
+		this.media = media;
 	}
 
-	@Column(name = "mediaId")
-	private Integer mediaId;
-	
-	
 }

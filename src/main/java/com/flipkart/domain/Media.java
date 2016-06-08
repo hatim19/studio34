@@ -1,12 +1,14 @@
 package com.flipkart.domain;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Media")
@@ -14,7 +16,7 @@ public class Media implements Serializable{
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private int id;
 
 	@Column(name = "createdAt")
 	private String createdAt;
@@ -30,8 +32,12 @@ public class Media implements Serializable{
 	
 	@Column(name = "imageName")
 	private String imageName ;
-	
-	public Integer getId() {
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "media")
+	@JsonManagedReference
+	private List<Section> section = new ArrayList<Section>() ;
+
+	public int getId() {
 		  return id;
 	}
 
@@ -77,7 +83,14 @@ public class Media implements Serializable{
 
 	public void setUpdatedAt(String UpdatedAt) {
 		  this.updatedAt = UpdatedAt ;
-	}			 
-					 
-	
+	}
+
+	public List<Section> getSection() {
+		return section;
+	}
+
+	public void setSection(List<Section> section) {
+		this.section = section;
+	}
+
 }

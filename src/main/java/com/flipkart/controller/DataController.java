@@ -28,11 +28,11 @@ public interface DataController {
 	ModelAndView getHomePageList();
 
 	@RequestMapping(value="/sections/{mediaId}",method= RequestMethod.GET)
-	ModelAndView getSectionList(@PathVariable("mediaId") Integer mediaId);
+	ModelAndView getSectionList(@PathVariable("mediaId") int mediaId);
 
 	@RequestMapping(value="/showMore/{episode}",method=RequestMethod.GET)
 	@ResponseBody
-	List<HomePageModel> showMore(@PathVariable("episode") Integer n) ;
+	List<HomePageModel> showMore(@PathVariable("episode") int n) ;
 
 
 }

@@ -35,7 +35,7 @@ public class DataControllerImpl implements DataController {
     @Transactional
     public ModelAndView getHomePageList() {
         Session session = sessionFactory.openSession();
-        List<HomePageModel> mediaList = mediaService.getHomePageList(session);
+        List<HomePageModel> mediaList = mediaService.getHomePageList(0,session);
         ModelAndView mv = new ModelAndView("home", "mediaList", mediaList);
         mv.addObject("episode",mediaList.size());
         return mv ;
@@ -43,11 +43,11 @@ public class DataControllerImpl implements DataController {
 
 
 
-    public ModelAndView getSectionList(@PathVariable("mediaId") Integer mediaId) {
+    public ModelAndView getSectionList(@PathVariable("mediaId") int mediaId) {
 
         Session session = sessionFactory.openSession();
-        List<Section> sectionList = mediaService.getSectionByMediaId(mediaId,session);
         Media media = mediaService.getMedia(mediaId,session) ;
+        List<Section> sectionList = media.getSection() ;
         ModelAndView mv = new ModelAndView("sections","sectionList", sectionList);
         mv.addObject("media",media);
         return mv ;
@@ -57,9 +57,9 @@ public class DataControllerImpl implements DataController {
 
 
 
-    public List<HomePageModel> showMore(@PathVariable("episode") Integer n) {
+    public List<HomePageModel> showMore(@PathVariable("episode") int n) {
         Session session = sessionFactory.openSession();
-        List<HomePageModel> mediaList = mediaService.getHomePageListOffset(n,session);
+        List<HomePageModel> mediaList = mediaService.getHomePageList(n,session);
         return mediaList;
     }
 

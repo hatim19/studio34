@@ -57,7 +57,5 @@
 	
 	<bean id="mediaServiceImpl" class="com.flipkart.services.MediaServiceImpl" />
 	<bean id="MediaRepositoryHibernate" class="com.flipkart.repository.Impl.MediaRepositoryHibernate" />
-	<bean id="HomePageModelRepositoryHibernate" class="com.flipkart.repository.Impl.HomePageModelRepositoryHibernate" />
-	<bean id="SectionModelRepositoryHibernate" class="com.flipkart.repository.Impl.SectionRepositoryHibernate" />
 
 </beans>

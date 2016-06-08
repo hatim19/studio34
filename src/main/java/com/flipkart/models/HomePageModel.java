@@ -8,7 +8,7 @@ public class HomePageModel {
 	
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private int id;
 	
 	@Column(name = "imageName")
 	private String imageName;
@@ -26,7 +26,7 @@ public class HomePageModel {
 		return this.imageName ;
 	}
 	
-	public Integer getId ( ) {
+	public int getId ( ) {
 		
 		return this.id ;
 	}

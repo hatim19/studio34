@@ -10,11 +10,9 @@ import com.flipkart.models.HomePageModel;
 
 public interface MediaService {
 
-	public List<HomePageModel> getHomePageList(Session session);
 	 
-	public List getHomePageListOffset(Integer lastEpisode, Session session);
+	public List getHomePageList(int n, Session session );
 	
-	public Media getMedia(Integer id, Session session) ;
-	
-	public List<Section> getSectionByMediaId(Integer id, Session session) ;
+	public Media getMedia(int id, Session session) ;
+
 }
