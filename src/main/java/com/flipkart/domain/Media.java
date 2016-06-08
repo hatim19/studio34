@@ -14,7 +14,7 @@ public class Media implements Serializable{
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private Integer id;
 
 	@Column(name = "createdAt")
 	private String createdAt;
@@ -31,7 +31,7 @@ public class Media implements Serializable{
 	@Column(name = "imageName")
 	private String imageName ;
 	
-	public int getId() {
+	public Integer getId() {
 		  return id;
 	}
 

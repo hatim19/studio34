@@ -1,11 +1,9 @@
 package com.flipkart.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "Media")
 public class HomePageModel {
 	
 	@Id

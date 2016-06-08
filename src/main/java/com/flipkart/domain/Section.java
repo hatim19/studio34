@@ -15,7 +15,7 @@ public class Section {
 	
 	@Id
 	@GeneratedValue
-	private String id ;
+	private Integer id ;
 	
 	@Column(name = "isHighlight")
 	private boolean isHighlight;
@@ -32,11 +32,11 @@ public class Section {
 	@Column(name = "updatedAt")
 	private String updatedAt;
 	
-	public String getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -80,16 +80,16 @@ public class Section {
 		this.updatedAt = updatedAt;
 	}
 
-	public String getMediaId() {
+	public Integer getMediaId() {
 		return mediaId;
 	}
 
-	public void setMediaId(String mediaId) {
+	public void setMediaId(Integer mediaId) {
 		this.mediaId = mediaId;
 	}
 
 	@Column(name = "mediaId")
-	private String mediaId;
+	private Integer mediaId;
 	
 	
 }
