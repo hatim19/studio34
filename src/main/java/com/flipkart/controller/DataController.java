@@ -1,38 +1,28 @@
 package com.flipkart.controller;
 
-import java.util.List;
-
-import javax.transaction.Transactional;
-
-import com.flipkart.domain.Section;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import com.flipkart.models.HomePageResponse;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.flipkart.domain.Media;
-import com.flipkart.models.HomePageModel;
-import com.flipkart.services.MediaService;
+import java.util.List;
 
 
 
 public interface DataController {
 
 
-	@RequestMapping("/home")
+	@RequestMapping("/homeMediaList")
 	ModelAndView getHomePageList();
 
 	@RequestMapping(value="/sections/{mediaId}",method= RequestMethod.GET)
 	ModelAndView getSectionList(@PathVariable("mediaId") int mediaId);
 
-	@RequestMapping(value="/showMore/{episode}",method=RequestMethod.GET)
+	@RequestMapping(value="/mediaListWithOffset/{episode}",method=RequestMethod.GET)
 	@ResponseBody
-	List<HomePageModel> showMore(@PathVariable("episode") int n) ;
+	List<HomePageResponse> mediaListWithOffset(@PathVariable("episode") int n) ;
 
 
 }

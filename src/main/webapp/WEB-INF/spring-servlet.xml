@@ -26,7 +26,7 @@
             <list>  
                 <value>com.flipkart.domain.Media</value>
 				<value>com.flipkart.domain.Section</value>
-				<value>com.flipkart.models.HomePageModel</value>
+				<value>com.flipkart.models.HomePageResponse</value>
             </list>   
         </property> 
 		<property name="hibernateProperties">

@@ -3,16 +3,13 @@ package com.flipkart.controller.Impl;
 import com.flipkart.controller.DataController;
 import com.flipkart.domain.Media;
 import com.flipkart.domain.Section;
-import com.flipkart.models.HomePageModel;
+import com.flipkart.models.HomePageResponse;
 import com.flipkart.services.MediaService;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.transaction.Transactional;
@@ -35,7 +32,7 @@ public class DataControllerImpl implements DataController {
     @Transactional
     public ModelAndView getHomePageList() {
         Session session = sessionFactory.openSession();
-        List<HomePageModel> mediaList = mediaService.getHomePageList(0,session);
+        List<HomePageResponse> mediaList = mediaService.getHomePageList(session,0);
         ModelAndView mv = new ModelAndView("home", "mediaList", mediaList);
         mv.addObject("episode",mediaList.size());
         return mv ;
@@ -46,7 +43,7 @@ public class DataControllerImpl implements DataController {
     public ModelAndView getSectionList(@PathVariable("mediaId") int mediaId) {
 
         Session session = sessionFactory.openSession();
-        Media media = mediaService.getMedia(mediaId,session) ;
+        Media media = mediaService.getMedia(session,mediaId) ;
         List<Section> sectionList = media.getSection() ;
         ModelAndView mv = new ModelAndView("sections","sectionList", sectionList);
         mv.addObject("media",media);
@@ -56,10 +53,9 @@ public class DataControllerImpl implements DataController {
 
 
 
-
-    public List<HomePageModel> showMore(@PathVariable("episode") int n) {
+    public List<HomePageResponse> mediaListWithOffset(@PathVariable("episode") int n) {
         Session session = sessionFactory.openSession();
-        List<HomePageModel> mediaList = mediaService.getHomePageList(n,session);
+        List<HomePageResponse> mediaList = mediaService.getHomePageList(session,n);
         return mediaList;
     }
 

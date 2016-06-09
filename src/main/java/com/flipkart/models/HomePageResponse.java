@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Media")
-public class HomePageModel {
+public class HomePageResponse {
 	
 	@Id
 	@GeneratedValue
