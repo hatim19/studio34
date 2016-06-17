@@ -5,6 +5,7 @@ import com.flipkart.models.HomePageResponse;
 import com.flipkart.repository.MediaRepository;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class MediaRepositoryHibernate implements MediaRepository {
     public List<Media> getMediaHome(Session session, int offset , int limit) {
 
         Criteria cr = session.createCriteria(Media.class);
+        cr.addOrder(Order.desc("createdAt"));
         cr.setMaxResults(limit);
         cr.setFirstResult(offset);
         return (List<Media>)cr.list();

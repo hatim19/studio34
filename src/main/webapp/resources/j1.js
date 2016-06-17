@@ -5,7 +5,7 @@ $( document ).ready(function() {
 /* */
 
 function showMore( ) {
-
+	//alert("gd");
 	var episode = document.getElementById("episode") ;
 	$.ajax({
         type: "GET",
@@ -15,7 +15,7 @@ function showMore( ) {
         contentType: 'application/json',
         success: function(result){
 
-        	episode.innerHTML = Number(episode.innerHTML) +  Number(result.length);      	
+        	episode.innerHTML = Number(episode.innerHTML) +  Number(result.length);
        
         	if ( result.length == 0 ){
         		
