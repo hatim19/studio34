@@ -20,8 +20,6 @@ public interface MediaService {
 	
 	public Media getMedia(Session session, int mediaId) ;
 
-	public String streamIt( ) ;
-
 	public GoogleResponse getUserProfile(OAuthServiceProvider googleServiceProvider, WebRequest request) ;
 
 	public boolean logout(WebRequest request) ;
@@ -29,4 +27,6 @@ public interface MediaService {
 	public String googleLogin(WebRequest request,OAuthServiceProvider googleServiceProvider) ;
 
 	public String googleCallback(String oauthVerifier,WebRequest request,OAuthServiceProvider googleServiceProvider);
+
+	public boolean isLoggedIn(WebRequest request ) ;
 }

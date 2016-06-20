@@ -64,36 +64,13 @@ public class MediaServiceImpl implements MediaService{
 			HomePageResponse homePageResponse = new HomePageResponse() ;
 			homePageResponse.setId(media.getId());
 			homePageResponse.setImageName(media.getImageName());
-
 			homePageResponseList.add(homePageResponse);
 		}
 		return homePageResponseList;
 	}
 	
 	public Media getMedia( Session session , int mediaId ){
-
 			return mediaRepository.getById(session,mediaId);
-	}
-
-	public String streamIt( ){
-		InputStream in = null;
-		OutputStream outputStream = null;
-		String s = "" ;
-
-		try {
-
-			//byte[] b = Files.readAllBytes(new File("/home/hatim.ali/flipkart/studio34/src/main/webapp/resources/nursery64.mp3").toPath());
-			File f = new File("/home/hatim.ali/flipkart/studio34/src/main/webapp/resources/nursery64.mp3") ;
-			in = new FileInputStream(f) ;
-			byte[] b = new byte[(int)f.length()];
-			in.read(b);
-			//s =  Base64.getEncoder().encodeToString(b) ;
-
-		}catch (IOException e) {
-			e.printStackTrace();
-		} finally {
-		}
-		return "data:audio/mp3;base64,"+s ;
 	}
 
 	public GoogleResponse getUserProfile(OAuthServiceProvider googleServiceProvider , WebRequest request) {
@@ -111,7 +88,6 @@ public class MediaServiceImpl implements MediaService{
 			GoogleResponse googleResponse = gson.fromJson(json, GoogleResponse.class);
 			return googleResponse;
 		} else {
-			System.out.println("here also");
 			return new GoogleResponse();
 
 		}
@@ -121,17 +97,7 @@ public class MediaServiceImpl implements MediaService{
 
 		request.removeAttribute(ATTR_OAUTH_ACCESS_TOKEN,SCOPE_SESSION);
 		Token accessToken = (Token)request.getAttribute(ATTR_OAUTH_ACCESS_TOKEN,SCOPE_SESSION);
-		if ( accessToken == null ){
-
-			System.out.println("Logged Out Successfully");
-			return true ;
-		}else{
-
-			System.out.println("Error Logging Out");
-			return false ;
-
-		}
-
+		return (accessToken == null ? true : false) ;
 	}
 
 	public String googleLogin(WebRequest request,OAuthServiceProvider googleServiceProvider){
@@ -139,9 +105,7 @@ public class MediaServiceImpl implements MediaService{
 		ModelAndView mv ;
 		Token accessToken = (Token) request.getAttribute(ATTR_OAUTH_ACCESS_TOKEN, SCOPE_SESSION);
 		OAuthService service = googleServiceProvider.getService();
-
 		if (accessToken == null) {
-
 			request.setAttribute(ATTR_OAUTH_REQUEST_TOKEN, null, SCOPE_SESSION);
 			return "redirect: " + service.getAuthorizationUrl(null) ;
 		}
@@ -154,7 +118,6 @@ public class MediaServiceImpl implements MediaService{
 		String json =  oauthResponse.getBody() ;
 		GoogleResponse googleResponse = gson.fromJson(json, GoogleResponse.class);
 		return "redirect: /homeMediaList" ;
-
 	}
 
 	public String googleCallback(String oauthVerifier,WebRequest request,OAuthServiceProvider googleServiceProvider){
@@ -173,5 +136,10 @@ public class MediaServiceImpl implements MediaService{
 		String json =  oauthResponse.getBody() ;
 		GoogleResponse googleResponse = gson.fromJson(json, GoogleResponse.class);
 		return "redirect: /homeMediaList" ;
+	}
+
+	public boolean isLoggedIn ( WebRequest request ){
+
+		return ((Token) request.getAttribute(ATTR_OAUTH_ACCESS_TOKEN, SCOPE_SESSION) != null) ? false : true ;
 	}
 }

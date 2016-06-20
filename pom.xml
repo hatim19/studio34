@@ -8,13 +8,16 @@
  <name>Studio34</name>
  <url>http://maven.apache.org</url>
 
- <properties>
+  <properties>
+  <pac4jVersion>1.9.0</pac4jVersion>
   <spring.version>4.0.5.RELEASE</spring.version>
   <jdk.version>1.8</jdk.version>
   <hibernate.version>4.3.5.Final</hibernate.version>
   <log4j.version>1.2.17</log4j.version>
   <jackson.version>1.9.10</jackson.version>
   <context.path>Studio34</context.path>
+  <springSecurityPac4jVersion>1.5.0-SNAPSHOT</springSecurityPac4jVersion>
+  <jspApiVersion>2.1</jspApiVersion>
  </properties>
 
  <dependencies>
@@ -42,13 +45,12 @@
     <groupId>com.amazonaws</groupId>
     <artifactId>aws-java-sdk-dynamodb</artifactId>
     <version>1.10.10</version>
-  </dependency>  	
-   	
-  <dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>${log4j.version}</version>
-	</dependency>
+  </dependency>
+     <dependency>
+               <groupId>log4j</groupId>
+               <artifactId>log4j</artifactId>
+               <version>${log4j.version}</version>
+       </dependency>
 
 	<dependency>
 			<groupId>org.springframework</groupId>
@@ -65,12 +67,12 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>${hibernate.version}</version>
   </dependency>
-  
-  <dependency>
-   <groupId>org.springframework</groupId>
-   <artifactId>spring-core</artifactId>
-   <version>${spring.version}</version>
-  </dependency>
+
+     <dependency>
+         <groupId>org.springframework</groupId>
+         <artifactId>spring-core</artifactId>
+         <version>${spring.version}</version>
+     </dependency>
 	
   <dependency>
 			<groupId>jstl</groupId>
@@ -90,7 +92,89 @@
    <version>${spring.version}</version>
   </dependency>
 
-  <!-- Jackson JSON Mapper -->
+     <!-- <dependency>
+         <groupId>org.pac4j</groupId>
+         <artifactId>spring-security-pac4j</artifactId>
+         <version>${springSecurityPac4jVersion}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.pac4j</groupId>
+         <artifactId>pac4j-oauth</artifactId>
+         <version>${pac4jVersion}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.pac4j</groupId>
+         <artifactId>pac4j-openid</artifactId>
+         <version>${pac4jVersion}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.pac4j</groupId>
+         <artifactId>pac4j-cas</artifactId>
+         <version>${pac4jVersion}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.pac4j</groupId>
+         <artifactId>pac4j-http</artifactId>
+         <version>${pac4jVersion}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.pac4j</groupId>
+         <artifactId>pac4j-saml</artifactId>
+         <version>${pac4jVersion}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.pac4j</groupId>
+         <artifactId>pac4j-oidc</artifactId>
+         <version>${pac4jVersion}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.pac4j</groupId>
+         <artifactId>pac4j-ldap</artifactId>
+         <version>${pac4jVersion}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.pac4j</groupId>
+         <artifactId>pac4j-jwt</artifactId>
+         <version>${pac4jVersion}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.pac4j</groupId>
+         <artifactId>pac4j-sql</artifactId>
+         <version>${pac4jVersion}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.pac4j</groupId>
+         <artifactId>pac4j-mongo</artifactId>
+         <version>${pac4jVersion}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.pac4j</groupId>
+         <artifactId>pac4j-stormpath</artifactId>
+         <version>${pac4jVersion}</version>
+     </dependency>
+     <dependency>
+         <groupId>org.springframework.security</groupId>
+         <artifactId>spring-security-config</artifactId>
+         <version>4.1.0.RELEASE</version>
+     </dependency>
+     <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+         <version>1.7.21</version>
+     </dependency>
+     <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>jcl-over-slf4j</artifactId>
+         <version>1.6.4</version>
+         <scope>runtime</scope>
+     </dependency>
+     <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-simple</artifactId>
+         <version>1.7.21</version>
+     </dependency> -->
+
+     <!-- Jackson JSON Mapper -->
   <dependency>
    <groupId>org.codehaus.jackson</groupId>
    <artifactId>jackson-mapper-asl</artifactId>

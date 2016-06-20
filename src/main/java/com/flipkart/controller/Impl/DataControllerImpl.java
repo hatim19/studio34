@@ -19,14 +19,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.transaction.Transactional;
-import java.io.*;
 import java.util.List;
 
-import static com.flipkart.controller.SessionAttributes.ATTR_OAUTH_ACCESS_TOKEN;
-import static com.flipkart.controller.SessionAttributes.ATTR_OAUTH_REQUEST_TOKEN;
-import static org.springframework.web.context.request.RequestAttributes.SCOPE_SESSION;
 
 /**
  * Created by root on 8/6/16.
@@ -50,13 +45,11 @@ public class DataControllerImpl  implements  DataController{
 
 
     @Transactional
-    public ModelAndView getHomePageList(WebRequest request) {
+    public ModelAndView getHomePageList(WebRequest request) throws Exception {
 
-        Token accessToken = (Token) request.getAttribute(ATTR_OAUTH_ACCESS_TOKEN, SCOPE_SESSION);
-        if ( accessToken == null ){
-            System.out.println("it's null inside homeMediaList");
+        if ( mediaService.isLoggedIn(request) == false ) {
+            throw new Exception("Generic Exception user not logged in ");
         }
-
         Session session = sessionFactory.openSession();
         List<HomePageResponse> mediaList = mediaService.getHomePageList(session,0);
         GoogleResponse googleResponse = mediaService.getUserProfile(googleServiceProvider,request) ;
@@ -67,10 +60,12 @@ public class DataControllerImpl  implements  DataController{
     }
 
 
-    //ye studio34 ki jaan he
+    public ModelAndView getSectionList(@PathVariable("mediaId") int mediaId,WebRequest request)
+    throws Exception {
 
-    public ModelAndView getSectionList(@PathVariable("mediaId") int mediaId,WebRequest request) {
-
+        if ( mediaService.isLoggedIn(request) == false ) {
+            throw new Exception("Generic Exception user not logged in ");
+        }
         Session session = sessionFactory.openSession();
         Media media = mediaService.getMedia(session,mediaId) ;
         List<Section> sectionList = media.getSection() ;
@@ -84,37 +79,41 @@ public class DataControllerImpl  implements  DataController{
 
 
 
-    public List<HomePageResponse> mediaListWithOffset(@PathVariable("episode") int n) {
+    public List<HomePageResponse> mediaListWithOffset(@PathVariable("episode") int n,WebRequest request)
+    throws Exception{
+        if ( mediaService.isLoggedIn(request) == false ) {
+            throw new Exception("Generic Exception user not logged in ");
+        }
         Session session = sessionFactory.openSession();
         List<HomePageResponse> mediaList = mediaService.getHomePageList(session,n);
         return mediaList;
     }
 
-    public  ModelAndView  logout(WebRequest request){
-
+    public  ModelAndView  logout(WebRequest request) throws Exception {
+        if ( mediaService.isLoggedIn(request) == false ) {
+            throw new Exception("Generic Exception user not logged in ");
+        }
         boolean flag = mediaService.logout(request) ;
-        if ( flag == true )
-            return  new ModelAndView("redirect: /loginPage");
-        else
-            return  new ModelAndView("redirect: /homeMediaList") ;
+        return (flag==true ? new ModelAndView("redirect: /loginPage") : new ModelAndView("redirect: /loginPage")) ;
     }
 
     public String loginPage( ) {
-
-
-        return "loginPage";
-    }
+        return "loginPage";}
 
 
     public String googleLogin(WebRequest request) {
-
         return mediaService.googleLogin(request,googleServiceProvider) ;
     }
 
     public  String googleCallback(@RequestParam(value="code", required=false) String oauthVerifier, WebRequest request) {
-
         return mediaService.googleCallback(oauthVerifier,request,googleServiceProvider);
+    }
 
+    public ModelAndView handleEmployeeNotFoundException( Exception ex) {
+        System.out.print(ex.getMessage());
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("redirect: /login");
+        return modelAndView;
     }
 
 }
