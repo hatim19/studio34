@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+import com.flipkart.Exceptions.IllegalDomainException;
 import com.flipkart.models.GoogleResponse;
 import com.flipkart.oauth.OAuthServiceProvider;
 import com.flipkart.repository.MediaRepository;
@@ -30,12 +31,10 @@ public class MediaServiceImpl implements MediaService{
 	private MediaRepository mediaRepository ;
 
 	public String getPropValue()  {
-
 		String Max_Retrieve = "";
 		InputStream inputStream = null;
 		Properties prop = new Properties();
 		String propFileName = "configure.properties";
-
 		try {
 			inputStream = getClass().getClassLoader().getResourceAsStream(propFileName);
 			prop.load(inputStream);
@@ -93,11 +92,10 @@ public class MediaServiceImpl implements MediaService{
 		}
 	}
 
-	public boolean logout (WebRequest request) {
+	public void logout (WebRequest request) {
 
 		request.removeAttribute(ATTR_OAUTH_ACCESS_TOKEN,SCOPE_SESSION);
-		Token accessToken = (Token)request.getAttribute(ATTR_OAUTH_ACCESS_TOKEN,SCOPE_SESSION);
-		return (accessToken == null ? true : false) ;
+
 	}
 
 	public String googleLogin(WebRequest request,OAuthServiceProvider googleServiceProvider){
@@ -120,7 +118,7 @@ public class MediaServiceImpl implements MediaService{
 		return "redirect: /homeMediaList" ;
 	}
 
-	public String googleCallback(String oauthVerifier,WebRequest request,OAuthServiceProvider googleServiceProvider){
+	public String googleCallback(String oauthVerifier,WebRequest request,OAuthServiceProvider googleServiceProvider) throws  IllegalDomainException{
 
 		OAuthService service = googleServiceProvider.getService();
 		Token requestToken = (Token) request.getAttribute(ATTR_OAUTH_REQUEST_TOKEN, SCOPE_SESSION);
@@ -135,11 +133,25 @@ public class MediaServiceImpl implements MediaService{
 		Gson gson = new Gson();
 		String json =  oauthResponse.getBody() ;
 		GoogleResponse googleResponse = gson.fromJson(json, GoogleResponse.class);
+
+		String email = googleResponse.getEmail() ;
+		if ( !email.contains("@flipkart.com") ) {
+				request.setAttribute("message","Not a flipkart Domain",SCOPE_SESSION);
+				throw  new IllegalDomainException("Not a Flipkart Domain");
+		}
 		return "redirect: /homeMediaList" ;
 	}
 
 	public boolean isLoggedIn ( WebRequest request ){
 
-		return ((Token) request.getAttribute(ATTR_OAUTH_ACCESS_TOKEN, SCOPE_SESSION) != null) ? false : true ;
+		return ((Token) request.getAttribute(ATTR_OAUTH_ACCESS_TOKEN, SCOPE_SESSION) != null) ? true : false ;
+	}
+
+	public void authenticateUser (WebRequest request) throws Exception {
+
+		if ( isLoggedIn(request) == false ) {
+			throw new Exception("Generic Exception user not logged in ");
+		}
+
 	}
 }

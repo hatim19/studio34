@@ -10,6 +10,8 @@
 </style>
 
 <body>
+
+  <p> ${message}</p>
   <a href="/login"><button class="w3-btn w3-red">Google</button></a>
 </body>
 </html>

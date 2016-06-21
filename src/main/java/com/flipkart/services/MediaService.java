@@ -3,6 +3,7 @@ package com.flipkart.services;
 import java.io.IOException;
 import java.util.List;
 
+import com.flipkart.Exceptions.IllegalDomainException;
 import com.flipkart.models.GoogleResponse;
 import com.flipkart.oauth.OAuthServiceProvider;
 import org.hibernate.Session;
@@ -22,11 +23,13 @@ public interface MediaService {
 
 	public GoogleResponse getUserProfile(OAuthServiceProvider googleServiceProvider, WebRequest request) ;
 
-	public boolean logout(WebRequest request) ;
+	public void logout(WebRequest request) ;
 
 	public String googleLogin(WebRequest request,OAuthServiceProvider googleServiceProvider) ;
 
-	public String googleCallback(String oauthVerifier,WebRequest request,OAuthServiceProvider googleServiceProvider);
+	public String googleCallback(String oauthVerifier,WebRequest request,OAuthServiceProvider googleServiceProvider) throws IllegalDomainException;
 
 	public boolean isLoggedIn(WebRequest request ) ;
+
+	public void authenticateUser (WebRequest request) throws Exception ;
 }
