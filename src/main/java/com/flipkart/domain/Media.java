@@ -33,6 +33,18 @@ public class Media implements Serializable{
 	@Column(name = "imageName")
 	private String imageName ;
 
+	public void setData(String data) {
+		this.data = data;
+	}
+
+	public String getData() {
+		return data;
+
+	}
+
+	@Column(name = "Data")
+	private String data;
+
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "media")
 	@JsonManagedReference
 	private List<Section> section = new ArrayList<Section>() ;

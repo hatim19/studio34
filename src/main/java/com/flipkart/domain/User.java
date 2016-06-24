@@ -27,7 +27,10 @@ public class User {
     private String email;
 
     @Column(name = "externalId")
-    private String externalId;
+    private int externalId;
+
+    @OneToOne(mappedBy="User", cascade=CascadeType.ALL)
+    private Group group;
 
 
 }

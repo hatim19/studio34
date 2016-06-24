@@ -29,14 +29,30 @@ function showMore( ) {
         		
         		for ( var j = 0 ; j+i < result.length && j < 3 ; j++ ){
 
-		    		episodeView += "<div class='col-sm-4'>" ;
-		        	episodeView += "<a href='sections/" + result[j+i]['id']+ "' class='thumbnail'>";
-		        	episodeView += "<img src='" + result[j+i]['imageName']+ "' class='img-responsive' style='width:95%' alt='Image' /></a>";
-		        	episodeView += "</div>" ;
+		    		episodeView += "<div class='col-sm-4 prl0'>" ;
+					episodeView += "<p class='ep'>"+result[j+i]['name']+"</p>" ;
+		        	episodeView += "<a href='sections/" + result[j+i]['id']+ "' >";
+		        	episodeView += "<img src='" + result[j+i]['imageName']+ "' class='img-responsive' style='width:100%' alt='Image' /></a>";
+					episodeView += "<p class='ep1'>"+result[j+i]['name']+"</p>" ;
+					episodeView += "<p class='ps'>"+result[j+i]['data']+"</p>" ;
+					episodeView += "</div>" ;
 		        	
 		    	}
-        		
+
+				/*
+				* <div class="col-sm-4 prl0">
+				 <p class="ep">${media.name}</p>
+				 <a href="sections/${media.id}">
+				 <img src="${media.imageName}" class="img-responsive" style="width:100%" alt="Image" />
+				 </a>
+				 <p class="ep1">${media.name}</p>
+				 <p class="ps">${media.data}</p>
+				 </div>
+				*
+				* */
+
         		episodeView += "</div>" ;
+				//alert(episodeView);
         		$('.episode-container').append(episodeView);
         		
         		if ( j != 3 ){

@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.util.List;
 
 import com.flipkart.Exceptions.IllegalDomainException;
+import com.flipkart.Exceptions.UserNotLoginException;
 import com.flipkart.models.GoogleResponse;
+import com.flipkart.models.SuggestionResponse;
 import com.flipkart.oauth.OAuthServiceProvider;
 import org.hibernate.Session;
 import com.flipkart.domain.Media;
@@ -31,5 +33,7 @@ public interface MediaService {
 
 	public boolean isLoggedIn(WebRequest request ) ;
 
-	public void authenticateUser (WebRequest request) throws Exception ;
+	public void authenticateUser (WebRequest request) throws UserNotLoginException ;
+
+	public List<SuggestionResponse> getSuggestions(Session session, String q) ;
 }

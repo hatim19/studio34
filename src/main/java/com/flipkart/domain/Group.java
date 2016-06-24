@@ -1,9 +1,8 @@
 package com.flipkart.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import javax.persistence.*;
 
 /**
  * Created by hatim.ali on 21/6/16.
@@ -11,13 +10,20 @@ import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "Media")
+@Table(name = "Group")
 public class Group {
 
-    @Id
-    @GeneratedValue
-    private int id;
+    @Column(name = "name")
+    private String name;
 
-    
+    @Id
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="userId", referencedColumnName = "id")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id", nullable = false,referencedColumnName = "groupId")
+    @JsonBackReference
+    private Role role;
 
 }

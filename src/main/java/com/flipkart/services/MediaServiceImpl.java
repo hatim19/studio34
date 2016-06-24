@@ -7,7 +7,9 @@ import java.util.Properties;
 import java.util.logging.Logger;
 
 import com.flipkart.Exceptions.IllegalDomainException;
+import com.flipkart.Exceptions.UserNotLoginException;
 import com.flipkart.models.GoogleResponse;
+import com.flipkart.models.SuggestionResponse;
 import com.flipkart.oauth.OAuthServiceProvider;
 import com.flipkart.repository.MediaRepository;
 import com.google.gson.Gson;
@@ -54,18 +56,18 @@ public class MediaServiceImpl implements MediaService{
 	}
 	
 
-	public List<HomePageResponse> getHomePageList(Session session , int offset ) {
+	public List<Media> getHomePageList(Session session , int offset ) {
 
 		int MAX_RETRIEVE = Integer.parseInt(getPropValue());
 		List<Media> mediaList = mediaRepository.getMediaHome( session , offset, MAX_RETRIEVE) ;
-		List<HomePageResponse> homePageResponseList = new ArrayList<HomePageResponse>( );
+		/*List<HomePageResponse> homePageResponseList = new ArrayList<HomePageResponse>( );
 		for( Media media : mediaList ){
 			HomePageResponse homePageResponse = new HomePageResponse() ;
 			homePageResponse.setId(media.getId());
 			homePageResponse.setImageName(media.getImageName());
 			homePageResponseList.add(homePageResponse);
-		}
-		return homePageResponseList;
+		}*/
+		return mediaList;
 	}
 	
 	public Media getMedia( Session session , int mediaId ){
@@ -147,11 +149,18 @@ public class MediaServiceImpl implements MediaService{
 		return ((Token) request.getAttribute(ATTR_OAUTH_ACCESS_TOKEN, SCOPE_SESSION) != null) ? true : false ;
 	}
 
-	public void authenticateUser (WebRequest request) throws Exception {
+	public void authenticateUser (WebRequest request) throws UserNotLoginException {
 
 		if ( isLoggedIn(request) == false ) {
-			throw new Exception("Generic Exception user not logged in ");
+			System.out.print("user is not login");
+			throw new UserNotLoginException("Generic Exception user not logged in ");
 		}
 
+	}
+
+	public List<SuggestionResponse> getSuggestions(Session session, String q ) {
+		List<SuggestionResponse> suggestionResponseList = mediaRepository.getMediaWithString(session,q) ;
+
+		return suggestionResponseList ;
 	}
 }

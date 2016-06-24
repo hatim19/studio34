@@ -1,3 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -248,30 +253,40 @@
     Your browser does not support the audio element.
 </audio>
 
+<h3>Number Parsing:</h3>
+<c:set var="balance" value="1250003.350" />
+
+<fmt:parseNumber var="i" type="number" value="${balance}" />
+<p>Parsed Number (1) : <c:out value="${i}" /></p>
+<fmt:parseNumber var="i" integerOnly="true"
+                 type="number" value="${balance}" />
+<p>Parsed Number (2) : <c:out value="${i}" /></p>
+
 <div style="padding-right: 50px; padding-left: 50px; ">
 
     <h4 style="text-align: center;color: #201737;font:  bold 30px Georgia, serif;">Segments</h4>
 
 
-    <button onclick="document.getElementById('myVideo').currentTime = 35;" style="color: black;
-  font-size: 15px;"> 0:35</button> <id="cdf" style = "; font-size: 18px; " > : RJ Seetal and RJ Anand kick off the 31st episode of Studio34! <br>
-    <button onclick="document.getElementById('myVideo').currentTime = 181;" style="color: black;
-  font-size: 15px;">3:02</button> : Butterfly – Crazy Town<br>
-    <button onclick="document.getElementById('myVideo').currentTime = 372;" style="color: black;
-  font-size: 15px;">6:20</button> : No Diggity – Chet Faker<br>
-    <button onclick="document.getElementById('myVideo').currentTime = 568;" style="color: black;
-  font-size: 15px;">9:48</button>  : Seetal and Anand talk about Flipkart's revised, 10 day return policy, the Flipkart Gaming Online Championship, Ads PLA on iOS, and more, on Hashtag<br>
-    <button onclick="document.getElementById('myVideo').currentTime = 905;" style="color: black;
-  font-size: 15px;">15:09</button>  : Barso Re – Guru<br>
-    <button onclick="document.getElementById('myVideo').currentTime = 1200;" style="color: black;
-  font-size: 15px;">20:01</button> : Morni – Panjabi MC<br>
-    <button onclick="document.getElementById('myVideo').currentTime = 1480;" style="color: black;
-  font-size: 15px;">24:46</button> : Utkarsh B talks to Anand and Seetal about the Reignite Core FSNs and more on Point of View<br></id="cdf">
+    <c:forEach items="${sectionList}" var="section">
+
+        <button onclick="seek(${section.getStartTime()})" style="color: black;
+        font-size: 15px;">
+                <fmt:parseNumber var="i" type="number" value="${(section.getStartTime()/60)}" integerOnly="true" />
+                <c:out value="${i}" />:${(section.getStartTime()%60)}
+        </button> <id="cdf" style = "; font-size: 18px; " >${section.getData()}<br>
+
+    </c:forEach>
 
 </div>
 
 <script>
     var vid = document.getElementById("myVideo");
+
+    function seek( time ){
+        alert(time);
+        document.getElementById('myVideo').currentTime = time ;
+        $(this).html(time) ;
+    }
 
     function getCurTime() {
         alert(vid.currentTime);

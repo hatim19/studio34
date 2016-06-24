@@ -250,7 +250,21 @@
       </c:forEach>
     </div>
   </div>
+  <c:if test="${not empty suggestionResponseList}">
+  <br><br><h2>Suggestions</h2><br><br>
+  <div class="container suggestion-container">
+    <div class="row">
+      <c:forEach items="${suggestionResponseList}" var="suggestion">
+        <div class="col-sm-4">
+          <a href="sections/${suggestion.getMedia().getId()}" class='thumbnail'>
+            <img src="${suggestion.getMedia().getImageName()}" class="img-responsive" style="width:95%" alt="Image" /></a>
+        </div>
+      </c:forEach>
+    </div>
+  </div>
+  </c:if>
 </div>
+
 <br />
 
 <span id="episode">${episode}</span>
