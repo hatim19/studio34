@@ -497,9 +497,9 @@
     						<li class="dropdown">
     							<a href="#" style="background-color: rgba(0,0,0,0);  "  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Episodes <span class="caret"></span></a>
     							<ul class="dropdown-menu clr0 hov" style="border-top-color: currentColor;">
-    								<li><a href="/sections/10">Current Episode</a></li>
-    								<li><a href="/sections/9">Previous Episode</a></li>
-    								<li><a href="/homeMediaList#pe">All Episodes</a></li>
+    								<li><a href="#">Current Episode</a></li>
+    								<li><a href="#">Previous Episode</a></li>
+    								<li><a href="#">All Episodes</a></li>
     							</ul>
     						</li>
     						<li><a href="#">Contact Us</a></li>
@@ -509,8 +509,8 @@
     						<li class="dropdown">
     							<a href="#" style="background-color: rgba(0,0,0,0); padding-left: 16px; "  class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" ></span> <span class="caret"></span></a>
     							<ul class="dropdown-menu clr0 pl20 hov" style="border-top-color: currentColor;">
-    								<li><a href="#">${userProfile.name}</a></li>
-    								<li><a href="/logout">Log Out</a></li>
+    								<li><a href="#"></a></li>
+    								<li><a href="#">Log Out</a></li>
     							</ul>
     						</li>
     						<!--li><a href="#"><span class="glyphicon glyphicon-user" ></span> User</a></li-->
@@ -548,7 +548,7 @@
           <!--h3>Chania</h3>
           <p>The atmosphere in Chania has a touch of Florence and Venice.</p-->
           	<audio id="myaudio" style="display: none;" style="width: 100%;" controls autoplay >
-          		<source src="/resources/playerResources/s34.mp3" type="audio/mpeg" >
+          		<source src="http://10.47.2.2/sampleBucket/studio34_1.mp3" type="audio/mpeg" >
           			Your browser does not support the audio element.
           		</audio>
 
@@ -607,10 +607,10 @@
         </script>
 
         <div >
-        	<a href="#/" onclick="fastb()"><img class="pp" src="/resources/playerResources/Previous.png" ></a>
+        	<a href="#" onclick="return fastb()"><img class="pp" src="/resources/playerResources/Previous.png" ></a>
         	<div id="infoToggler" style="display: inline">            
-        		<a href = "#/" onclick="pauseVid()"><img src="/resources/playerResources/Pause.png" class="pp" /></a>
-        		<a href = "#/" onclick="playVid()"><img src="/resources/playerResources/Play.png" class="pp" style="display:none"/></a>
+        		<a href = "#" onclick="return pauseVid()"><img src="/resources/playerResources/Pause.png" class="pp" /></a>
+        		<a href = "#" onclick="return playVid()"><img src="/resources/playerResources/Play.png" class="pp" style="display:none"/></a>
         	</div>
 
         	<script type="text/javascript">
@@ -622,8 +622,8 @@
         	</script>
           <!--a href="#/" onclick="playVid()"><img src="Play.png" style="width: 20%"></a>
           <a href="#/" onclick="pauseVid()"><img src="Pause.png" style="width: 13%"></a-->
-          	<a href="#/" onclick="stop()"><img src="/resources/playerResources/Stop.png" class="pp"></a>
-          	<a href="#/" onclick="fastf()"><img src="/resources/playerResources/Next.png" class="pp"></a>
+          	<a href="#" onclick="return stop()"><img src="/resources/playerResources/Stop.png" class="pp"></a>
+          	<a href="#" onclick="return fastf()"><img src="/resources/playerResources/Next.png" class="pp"></a>
 
           </div>
       </div>
@@ -655,23 +655,7 @@
 
 		</thead>
 		<tbody>
-
-			<c:forEach items="${sectionList}" var="section">
 			<tr>
-				<td class="pt pb"><button class="button button2 fs1" onclick="document.getElementById('myaudio').currentTime = ${section.getStartTime()};" >
-					<fmt:parseNumber var="i" type="number" value="${(section.getStartTime()/60)}" integerOnly="true" />
-					<fmt:parseNumber var="ii" type="number" value="${i/10}" integerOnly="true" />
-					<c:if test="${ii=='0'}">0</c:if><c:out value="${i}" />:
-					<fmt:parseNumber var="iii" type="number" value="${(section.getStartTime()%60)}" integerOnly="true" />
-					<fmt:parseNumber var="iiii" type="number" value="${iii/10}" integerOnly="true" />
-					<c:if test="${iiii=='0'}">0</c:if>${(section.getStartTime()%60)}
-				</button></td>
-				<td class="tab1 fs" style="padding: 0px; ">:</td>
-				<td class="tab1 fs pb">${section.getData()}</td>
-			</tr>
-			</c:forEach>
-
-			<!--<tr>
 				<td class="pt pb"><button class="button button2 fs1" onclick="document.getElementById('myaudio').currentTime = 181;" > 03:02</button></td>
 				<td class="tab1 fs" style="padding: 0px; ">:</td>
 				<td class="tab1 fs pb">Butterfly – Crazy Town</td>
@@ -700,7 +684,7 @@
 				<td class="pt pb"><button class="button button2 fs1" onclick="document.getElementById('myaudio').currentTime = 2185;" > 24:46</button></td>
 				<td class="tab1 fs" style="padding: 0px; ">:</td>
 				<td class="tab1 fs pb">Utkarsh B talks to Anand and Seetal about the Reignite Core FSNs and more on Point of View</td>
-			</tr> -->
+			</tr>
 		</tbody>
 	</table>
 	
@@ -714,7 +698,9 @@
 
 	}
 	function stop() {
+
 		vid.currentTime=0;
+		return false;
 
 	}
 	function setCurTime() {
@@ -722,21 +708,23 @@
 
 	}
 	function fastf() {
-		vid.currentTime+=90;
 
+		vid.currentTime+=90;
+		return false;
 	}
 	function fastb() {
-		vid.currentTime-=90;
 
+		vid.currentTime-=90;
+		return false;
 	}
 	function playVid() {
 		vid.play();
-
+		return false;
 	}
 
 	function pauseVid() {
 		vid.pause();
-
+		return false;
 	}
 
 

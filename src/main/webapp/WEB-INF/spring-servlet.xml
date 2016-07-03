@@ -6,46 +6,10 @@
   http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
   http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.2.xsd
   http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
-<context:component-scan base-package="com.flipkart.controller.Impl" />
-	<context:property-placeholder location="classpath:database.properties" />
+<context:component-scan base-package="com.controller.Impl" />
 	<mvc:resources mapping="/resources/**" location="/resources/" /> 
 	<mvc:annotation-driven />
 
-
-	<bean id="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${database.driver}" />
-		<property name="url" value="${database.url}" />
-		<property name="username" value="${database.user}" />
-		<property name="password" value="${database.password}" />
-	</bean>
-
-	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="annotatedClasses">  
-            <list>  
-                <value>com.flipkart.domain.Media</value>
-				<value>com.flipkart.domain.Section</value>
-				<value>com.flipkart.models.HomePageResponse</value>
-            </list>   
-        </property> 
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
-			</props>
-		</property>
-	</bean>
-
-	<bean id="txManager"
-		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
-
-	<bean id="persistenceExceptionTranslationPostProcessor"
-		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-		
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix">
@@ -56,24 +20,5 @@
 		</property>
 	</bean>
 
-	<!--  oauth -->
-
-	<bean id="googleServiceConfig" class="com.flipkart.oauth.OauthServiceConfig">
-		<constructor-arg value="${app.config.oauth.google.apikey}" />
-		<constructor-arg value="${app.config.oauth.google.apisecret}"/>
-		<constructor-arg value="${app.config.oauth.google.callback}"/>
-		<constructor-arg value="${app.config.oauth.google.apiClass}"/>
-		<constructor-arg value="${app.config.oauth.google.scope}"/>
-
-	</bean>
-
-	<bean id="googleServiceProvider" class="com.flipkart.oauth.OAuthServiceProvider">
-		<constructor-arg name="config" ref="googleServiceConfig" />
-	</bean>
-	<!-- end of oauth  -->
-
-
-	<bean id="mediaServiceImpl" class="com.flipkart.services.MediaServiceImpl" />
-	<bean id="mediaRepositoryHibernate" class="com.flipkart.repository.Impl.MediaRepositoryHibernate" />
 
 </beans>
